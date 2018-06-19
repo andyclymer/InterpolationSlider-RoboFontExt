@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>addToMenu</key>
+	<array>
+		<dict>
+			<key>path</key>
+			<string>InterpolationSlider.py</string>
+			<key>preferredName</key>
+			<string>Interpolation Slider...</string>
+			<key>shortKey</key>
+			<string></string>
+		</dict>
+	</array>
+	<key>developer</key>
+	<string>Andy Clymer</string>
+	<key>developerURL</key>
+	<string>http://www.andyclymer.com/</string>
+	<key>html</key>
+	<true/>
+	<key>launchAtStartUp</key>
+	<false/>
+	<key>mainScript</key>
+	<string>InterpolationSlider.py</string>
+	<key>name</key>
+	<string>Interpolation Slider</string>
+	<key>requiresVersionMajor</key>
+	<string>1</string>
+	<key>requiresVersionMinor</key>
+	<string>5</string>
+	<key>timeStamp</key>
+	<real>1529444605.349705</real>
+	<key>version</key>
+	<string>1.0</string>
+</dict>
+</plist>
