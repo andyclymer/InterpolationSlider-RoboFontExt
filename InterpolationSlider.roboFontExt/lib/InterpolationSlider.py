@@ -39,6 +39,7 @@ class InterpolationPreviewWindow(object):
         self.w.bind("close", self.closed)
         
         self.collectFonts()
+        self.glyphChanged(None)
         
         addObserver(self, "glyphChanged", "currentGlyphChanged")
         addObserver(self, "fontsChanged", "newFontDidOpen")
