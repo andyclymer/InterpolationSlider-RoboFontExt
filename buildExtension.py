@@ -22,7 +22,7 @@ B.developerURL = 'http://www.andyclymer.com/'
 B.launchAtStartUp = False
 B.addToMenu = [{"path" : "InterpolationSlider.py", "preferredName" : "Interpolation Slider...", "shortKey" : ""}]
 B.requiresVersionMajor = '1'
-B.requiresVersionMinor = '5'
+B.requiresVersionMinor = '8'
 B.infoDictionary["html"] = True
 
 B.save(extensionPath, libPath=libPath, htmlPath=htmlPath, resourcesPath=resourcesPath, pycOnly=False)

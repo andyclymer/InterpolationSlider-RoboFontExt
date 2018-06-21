@@ -208,13 +208,17 @@ class InterpolationPreviewWindow(object):
                     dt.line(bPoint.anchor, outLoc)
                     dt.fill(r=1, g=1, b=1, a=1)    
                     dt.oval(bPoint.anchor[0] - (ptSize*0.5), bPoint.anchor[1] - (ptSize*0.5), ptSize, ptSize) 
+                    dt.fill(0)
                     # Draw an "X" over each BCP
                     if not bPoint.bcpIn == (0, 0):
-                        dt.line((inLoc[0]-(ptSize*0.5), inLoc[1]-(ptSize*0.5)), (inLoc[0]+(ptSize*0.5), inLoc[1]+(ptSize*0.5)))
-                        dt.line((inLoc[0]+(ptSize*0.5), inLoc[1]-(ptSize*0.5)), (inLoc[0]-(ptSize*0.5), inLoc[1]+(ptSize*0.5)))
+                        dt.oval(inLoc[0] - (ptSize*0.5), inLoc[1] - (ptSize*0.5), ptSize, ptSize) 
+                        #dt.line((inLoc[0]-(ptSize*0.5), inLoc[1]-(ptSize*0.5)), (inLoc[0]+(ptSize*0.5), inLoc[1]+(ptSize*0.5)))
+                        #dt.line((inLoc[0]+(ptSize*0.5), inLoc[1]-(ptSize*0.5)), (inLoc[0]-(ptSize*0.5), inLoc[1]+(ptSize*0.5)))
                     if not bPoint.bcpOut == (0, 0):
-                        dt.line((outLoc[0]-(ptSize*0.5), outLoc[1]-(ptSize*0.5)), (outLoc[0]+(ptSize*0.5), outLoc[1]+(ptSize*0.5)))
-                        dt.line((outLoc[0]+(ptSize*0.5), outLoc[1]-(ptSize*0.5)), (outLoc[0]-(ptSize*0.5), outLoc[1]+(ptSize*0.5)))
+                        dt.oval(outLoc[0] - (ptSize*0.5), outLoc[1] - (ptSize*0.5), ptSize, ptSize) 
+                        #dt.line((outLoc[0]-(ptSize*0.5), outLoc[1]-(ptSize*0.5)), (outLoc[0]+(ptSize*0.5), outLoc[1]+(ptSize*0.5)))
+                        #dt.line((outLoc[0]+(ptSize*0.5), outLoc[1]-(ptSize*0.5)), (outLoc[0]-(ptSize*0.5), outLoc[1]+(ptSize*0.5)))
+
             dt.restore()
         
         
