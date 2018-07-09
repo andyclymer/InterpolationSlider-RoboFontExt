@@ -32,7 +32,7 @@ class InterpolationPreviewWindow(object):
         self.w.title = vanilla.TextBox((10, 10, -10, 25), "Masters:", sizeStyle="small")
         self.w.font0 = vanilla.PopUpButton((10, 25, -10, 25), [], callback=self.glyphChanged, sizeStyle="small")
         self.w.font1 = vanilla.PopUpButton((10, 50, -10, 25), [], callback=self.glyphChanged, sizeStyle="small")
-        self.w.compatibilityText = vanilla.TextBox((-105, 83, 100, 25), u"Compatibility: ⚪️", sizeStyle="small")
+        self.w.compatibilityText = vanilla.TextBox((-105, 83, 100, 35), u"Compatibility: ⚪️", sizeStyle="small")
         self.w.line = vanilla.HorizontalLine((5, 110, -5, 1))
         self.w.interpValue = vanilla.Slider((10, 120, -10, 25), callback=self.optionsChanged, minValue=0, maxValue=1)
         self.w.interpValue.set(0.5)
@@ -152,20 +152,21 @@ class InterpolationPreviewWindow(object):
         self.testCompatibility()
         # Adjust the frame of the window to fit the interpolation
         # (Thanks Frederik!)
-        widths = []
-        if self.glyph0:
-            widths.append(self.glyph0.width)
-        if self.glyph1:
-            widths.append(self.glyph1.width)
-        if len(widths):
-            widths.sort()
-            view = self.window.getGlyphView()
-            scale = view.scale()
-            (x, y), (w, h) = view.frame()
-            ox, oy = view.offset()
-            extraWidth = widths[-1] * scale
-            view.setOffset((ox, oy))
-            view.setFrame_(((x, y), (w + extraWidth, h)))
+        if self.window:
+            widths = []
+            if self.glyph0:
+                widths.append(self.glyph0.width)
+            if self.glyph1:
+                widths.append(self.glyph1.width)
+            if len(widths):
+                widths.sort()
+                view = self.window.getGlyphView()
+                scale = view.scale()
+                (x, y), (w, h) = view.frame()
+                ox, oy = view.offset()
+                extraWidth = widths[-1] * scale
+                view.setOffset((ox, oy))
+                view.setFrame_(((x, y), (w + extraWidth, h)))
         # Update the view
         self.optionsChanged(None)
         
