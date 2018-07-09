@@ -150,6 +150,22 @@ class InterpolationPreviewWindow(object):
                 self.glyph1 = master1[glyphName]
         # Update the interp compatibility report
         self.testCompatibility()
+        # Adjust the frame of the window to fit the interpolation
+        # (Thanks Frederik!)
+        widths = []
+        if self.glyph0:
+            widths.append(self.glyph0.width)
+        if self.glyph1:
+            widths.append(self.glyph1.width)
+        if len(widths):
+            widths.sort()
+            view = self.window.getGlyphView()
+            scale = view.scale()
+            (x, y), (w, h) = view.frame()
+            ox, oy = view.offset()
+            extraWidth = widths[-1] * scale
+            view.setOffset((ox, oy))
+            view.setFrame_(((x, y), (w + extraWidth, h)))
         # Update the view
         self.optionsChanged(None)
         
