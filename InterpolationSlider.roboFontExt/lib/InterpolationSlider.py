@@ -5,12 +5,24 @@ from mojo.UI import CurrentGlyphWindow
 import mojo.drawingTools as dt
 from fontTools.pens.cocoaPen import CocoaPen
 from AppKit import NSColor
-
+from fontTools.pens.basePen import BasePen
 
 """
 Interpolation Slider
 by Andy Clymer, June 2018
 """
+
+class DecomposingPen(BasePen):
+    
+    def __init__(self, glyphSet, outPen):
+        super(DecomposingPen, self).__init__(glyphSet)
+        self._moveTo = outPen.moveTo
+        self._lineTo = outPen.lineTo
+        self._curveToOne = outPen.curveTo
+        self._closePath = outPen.closePath
+        self._endPath = outPen.endPath
+
+
 
 class InterpolationPreviewWindow(object):
     
@@ -22,8 +34,8 @@ class InterpolationPreviewWindow(object):
         self.fonts = []
         self.fontNames = []
         
-        self.glyph0 = None
-        self.glyph1 = None
+        self.glyph0 = RGlyph()#None
+        self.glyph1 = RGlyph()#None
         self.compatibilityReport = None
         self.interpolatedGlyph = RGlyph()
         
@@ -124,8 +136,8 @@ class InterpolationPreviewWindow(object):
         
     def glyphChanged(self, info):
         # Reset the glyph info
-        self.glyph0 = None
-        self.glyph1 = None
+        self.glyph0.clear()
+        self.glyph1.clear()
         self.compatibilityReport = None
         self.window = CurrentGlyphWindow()
         self.interpolatedGlyph.clear()
@@ -137,7 +149,7 @@ class InterpolationPreviewWindow(object):
         if self.currentGlyph:
             self.currentGlyph.addObserver(self, "optionsChanged", "Glyph.Changed")
             self.currentGlyph.addObserver(self, "optionsChanged", "Glyph.ContoursChanged")
-        if self.currentGlyph:
+        if not self.currentGlyph == None:
             # Update the glyph info
             glyphName = self.currentGlyph.name
             master0idx = self.w.font0.get()
@@ -145,9 +157,15 @@ class InterpolationPreviewWindow(object):
             master0 = self.fonts[master0idx]
             master1 = self.fonts[master1idx]
             if glyphName in master0:
-                self.glyph0 = master0[glyphName]
+                self.glyph0.clear()
+                pen = DecomposingPen(master0, self.glyph0.getPen())
+                master0[glyphName].draw(pen)
+
             if glyphName in master1:
-                self.glyph1 = master1[glyphName]
+                self.glyph1.clear()
+                pen = DecomposingPen(master1, self.glyph1.getPen())
+                master1[glyphName].draw(pen)
+                
         # Update the interp compatibility report
         self.testCompatibility()
         # Adjust the frame of the window to fit the interpolation
@@ -187,7 +205,6 @@ class InterpolationPreviewWindow(object):
             # Interpolate
             self.interpolatedGlyph.clear()
             self.interpolatedGlyph.interpolate(self.w.interpValue.get(), self.glyph0, self.glyph1)
-            self.interpolatedGlyph.clearComponents()
         self.testCompatibility()
         # ...and refresh the window
         if self.window:
