@@ -187,6 +187,7 @@ class InterpolationPreviewWindow(object):
             # Interpolate
             self.interpolatedGlyph.clear()
             self.interpolatedGlyph.interpolate(self.w.interpValue.get(), self.glyph0, self.glyph1)
+            self.interpolatedGlyph.clearComponents()
         self.testCompatibility()
         # ...and refresh the window
         if self.window:

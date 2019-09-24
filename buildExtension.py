@@ -13,7 +13,7 @@ resourcesPath = os.path.join(basePath, "resources")
 B = ExtensionBundle()
 
 B.name = "Interpolation Slider"
-B.version = "1.1"
+B.version = "1.2"
 B.mainScript = "InterpolationSlider.py"
 
 B.developer = "Andy Clymer"
